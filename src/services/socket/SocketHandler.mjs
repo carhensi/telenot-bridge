@@ -119,9 +119,17 @@ class SocketHandler {
         if (/^682[c|C]2[c|C]687302050200053001[e|E]1/.test(hexStr)) {
             return TelenotMsgType.SYS_DISARMED
         }
+
+        // pattern for alarm external
         if (/^682[c|C]2[c|C]6873020502000540/.test(hexStr)) {
             return TelenotMsgType.ALARM
         }
+
+        // pattern for alarm internal
+        if (/^683[c|C]3[c|C]6873020502010028/.test(hexStr)) {
+            return TelenotMsgType.ALARM
+        }
+
         // pattern for water/sensor alarms
         if (/^68[0-9A-Fa-f]{2}[0-9A-Fa-f]{2}687302050201002b/.test(hexStr)) {
             return TelenotMsgType.ALARM
