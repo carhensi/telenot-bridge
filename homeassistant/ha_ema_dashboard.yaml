@@ -1,0 +1,308 @@
+title: Alarmanlage
+cards:
+  - type: custom:button-card
+    entity: alarm_control_panel.alarmanlage
+    name: Alarmanalge
+    layout: vertical
+    show_name: true
+    show_state: false
+    show_icon: false
+    styles:
+      grid:
+        - grid-template-areas: "\"n s\" \"b b\""
+        - grid-template-columns: 1fr auto
+        - grid-template-rows: auto 1fr
+      card:
+        - padding: 16px
+        - border-radius: 12px
+        - background-color: rgba(255, 255, 255, 0.1)
+      name:
+        - font-size: 24px
+        - font-weight: normal
+        - color: var(--primary-text-color)
+        - margin-bottom: 16px
+        - justify-self: start
+    custom_fields:
+      s:
+        card:
+          type: custom:button-card
+          entity: alarm_control_panel.alarmanlage
+          show_name: false
+          show_state: true
+          show_icon: true
+          icon: mdi:shield
+          state:
+            - value: disarmed
+              styles:
+                card:
+                  - background-color: rgba(0, 255, 0, 0.2)
+                icon:
+                  - color: "#00c853"
+                state:
+                  - color: "#00c853"
+            - value: armed_home
+              styles:
+                card:
+                  - background-color: rgba(3, 169, 244, 0.2)
+                icon:
+                  - color: "#0288d1"
+                state:
+                  - color: "#0288d1"
+            - value: armed_away
+              styles:
+                card:
+                  - background-color: rgba(244, 67, 54, 0.2)
+                icon:
+                  - color: "#d32f2f"
+                state:
+                  - color: "#d32f2f"
+          state_display: |
+            [[[
+              if (entity.state === 'disarmed') return 'Unscharf';
+              if (entity.state === 'armed_home') return 'Intern scharf';
+              if (entity.state === 'armed_away') return 'Extern scharf';
+              return entity.state;
+            ]]]
+          styles:
+            card:
+              - border-radius: 16px
+              - padding: 6px 12px
+              - margin-top: "-4px"
+              - margin-right: "-4px"
+              - display: flex
+              - align-items: center
+              - transition: all 0.3s ease-in-out
+              - height: 32px
+              - min-width: 160px
+            icon:
+              - width: 20px
+              - height: 20px
+              - margin-right: 8px
+            state:
+              - font-weight: normal
+              - font-size: 14px
+      b:
+        card:
+          type: custom:layout-card
+          layout_type: grid
+          layout:
+            grid-template-columns: 1fr 1fr 1fr
+            grid-gap: 4px
+          cards:
+            - type: custom:button-card
+              entity: alarm_control_panel.alarmanlage
+              name: Intern scharf
+              icon: mdi:home-account
+              tap_action:
+                action: call-service
+                service: alarm_control_panel.alarm_arm_home
+                service_data:
+                  entity_id: alarm_control_panel.alarmanlage
+              state:
+                - value: armed_home
+                  styles:
+                    card:
+                      - border: 2px solid var(--primary-color)
+                      - opacity: 1
+                      - background-color: rgba(var(--rgb-primary-text-color), 0.1)
+                      - pointer-events: none
+                    name:
+                      - color: var(--primary-color)
+                    icon:
+                      - color: var(--primary-color)
+                - operator: template
+                  value: >
+                    [[[ return
+                    states['binary_sensor.telenot_zentrale_system_intern_bereit'].state
+                    === 'off' ]]]
+                  styles:
+                    card:
+                      - opacity: 0.5
+                      - pointer-events: none
+                      - background-color: var(--disabled-background)
+                    name:
+                      - color: var(--disabled-text-color)
+                    icon:
+                      - color: var(--disabled-text-color)
+                - operator: default
+                  styles:
+                    card:
+                      - border: 1px solid rgba(var(--rgb-primary-text-color), 0.3)
+                      - opacity: 1
+                    name:
+                      - color: var(--primary-text-color)
+                    icon:
+                      - color: var(--primary-text-color)
+              styles:
+                card:
+                  - height: 40px
+                  - border-radius: 4px
+                  - transition: all 0.3s ease-in-out
+                  - display: flex
+                  - flex-direction: column
+                  - justify-content: center
+                  - align-items: center
+                  - background-color: rgba(var(--rgb-primary-background-color), 0.1)
+                  - padding: 4px
+                  - cursor: pointer
+                card:hover:
+                  - background-color: rgba(var(--rgb-primary-color), 0.1)
+                name:
+                  - font-size: 12px
+                  - font-weight: bold
+                  - text-align: center
+                  - margin-top: 2px
+                icon:
+                  - width: 20px
+                  - height: 20px
+            - type: custom:button-card
+              entity: alarm_control_panel.alarmanlage
+              name: Extern scharf
+              icon: mdi:home
+              tap_action:
+                action: call-service
+                service: alarm_control_panel.alarm_arm_away
+                service_data:
+                  entity_id: alarm_control_panel.alarmanlage
+              state:
+                - value: armed_away
+                  styles:
+                    card:
+                      - border: 2px solid var(--primary-color)
+                      - opacity: 1
+                      - background-color: rgba(var(--rgb-primary-text-color), 0.1)
+                      - pointer-events: none
+                    name:
+                      - color: var(--primary-color)
+                    icon:
+                      - color: var(--primary-color)
+                - operator: template
+                  value: >
+                    [[[ return
+                    states['binary_sensor.telenot_zentrale_system_extern_bereit'].state
+                    === 'off' ]]]
+                  styles:
+                    card:
+                      - opacity: 0.5
+                      - pointer-events: none
+                      - background-color: var(--disabled-background)
+                    name:
+                      - color: var(--disabled-text-color)
+                    icon:
+                      - color: var(--disabled-text-color)
+                - operator: default
+                  styles:
+                    card:
+                      - border: 1px solid rgba(var(--rgb-primary-text-color), 0.3)
+                      - opacity: 1
+                    name:
+                      - color: var(--primary-text-color)
+                    icon:
+                      - color: var(--primary-text-color)
+              styles:
+                card:
+                  - height: 40px
+                  - border-radius: 4px
+                  - transition: all 0.3s ease-in-out
+                  - display: flex
+                  - flex-direction: column
+                  - justify-content: center
+                  - align-items: center
+                  - background-color: rgba(var(--rgb-primary-background-color), 0.1)
+                  - padding: 4px
+                  - cursor: pointer
+                card:hover:
+                  - background-color: rgba(var(--rgb-primary-color), 0.1)
+                name:
+                  - font-size: 12px
+                  - font-weight: bold
+                  - text-align: center
+                  - margin-top: 2px
+                icon:
+                  - width: 20px
+                  - height: 20px
+            - type: custom:button-card
+              entity: alarm_control_panel.alarmanlage
+              name: Unscharf
+              icon: mdi:shield-off
+              tap_action:
+                action: call-service
+                service: alarm_control_panel.alarm_disarm
+                service_data:
+                  entity_id: alarm_control_panel.alarmanlage
+              state:
+                - value: disarmed
+                  styles:
+                    card:
+                      - border: 2px solid var(--primary-color)
+                      - opacity: 1
+                      - background-color: rgba(var(--rgb-primary-text-color), 0.1)
+                      - pointer-events: none
+                    name:
+                      - color: var(--primary-color)
+                    icon:
+                      - color: var(--primary-color)
+                - operator: default
+                  styles:
+                    card:
+                      - border: 1px solid rgba(var(--rgb-primary-text-color), 0.3)
+                      - opacity: 1
+                    name:
+                      - color: var(--primary-text-color)
+                    icon:
+                      - color: var(--primary-text-color)
+              styles:
+                card:
+                  - height: 40px
+                  - border-radius: 4px
+                  - transition: all 0.3s ease-in-out
+                  - display: flex
+                  - flex-direction: column
+                  - justify-content: center
+                  - align-items: center
+                  - background-color: rgba(var(--rgb-primary-background-color), 0.1)
+                  - padding: 4px
+                  - cursor: pointer
+                card:hover:
+                  - background-color: rgba(var(--rgb-primary-color), 0.1)
+                name:
+                  - font-size: 12px
+                  - font-weight: bold
+                  - text-align: center
+                  - margin-top: 2px
+                icon:
+                  - width: 20px
+                  - height: 20px
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Aktive Melder
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "*bewegungsmelder*"
+              state: "on"
+            - entity_id: "*rauchmelder*"
+              state: "on"
+            - entity_id: "*wassermelder*"
+              state: "on"
+            - entity_id: "*schliesskontakt*"
+              state: "on"
+            - entity_id: "*magnetkontakt*"
+              state: "on"
+            - entity_id: "*sicherung*"
+              state: "on"
+            - entity_id: "*systemstatus*"
+              state: "on"
+            - entity_id: "*gehaeuse*"
+              state: "on"
+            - entity_id: "*signalgeber*"
+              state: "on"
+            - entity_id: "*sabotage*"
+              state: "on"
+            - entity_id: "*ueberfallmelder*"
+              state: "on"
+        sort:
+          method: name

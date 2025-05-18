@@ -31,22 +31,6 @@ Compared to the official Interface KNX 400 IP, this solution is significantly mo
 
 ---
 
-## 📦 Installation
-
-
-```bash
-# Clone the repository
-git clone https://github.com/carhensi/telenot-bridge.git
-
-# Navigate into the directory
-cd telenot
-
-# Install dependencies
-yarn install
-
-```
-
-
 ## 🔧 Hardware Requirement
 
 To use this package, you need an RS232 to Ethernet TCP/IP server module. Specifically:
@@ -82,11 +66,7 @@ TELNETPORT=your_telenot_port
 
 ## 🏃‍♂️ Usage
 
-Development Mode
-
-`yarn dev`
-
-Production Mode
+Start with running the ready to use container:
 
 ```bash
 docker run -i -t \
@@ -99,6 +79,22 @@ docker run -i -t \
 ## 📡 HomeAssistant Integration
 
 Ensure that `HOMEASSISTANT_AUTODISCOVERY` is set to true in your `.env` file to enable automatic discovery of your Telenot sensors in HomeAssistant.
+
+
+## 📦 Development
+
+
+```bash
+# Clone the repository
+git clone https://github.com/carhensi/telenot-bridge.git
+
+# Navigate into the directory
+cd telenot-bridge
+
+# Install dependencies
+yarn install
+
+```
 
 ## 🧪 Testing
 
