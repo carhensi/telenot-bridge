@@ -23,6 +23,7 @@
     "author": "Carsten Hensiek",
     "license": "ISC",
     "dependencies": {
+        "@babel/core": "^7.27.1",
         "dotenv": "^16.4.7",
         "eslint-plugin-security": "^3.0.1",
         "mqtt": "^5.10.4",
