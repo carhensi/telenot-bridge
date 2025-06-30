@@ -32,7 +32,7 @@
     },
     "devDependencies": {
         "@babel/preset-env": "^7.27.2",
-        "@jest/globals": "^29.7.0",
+        "@jest/globals": "^30.0.3",
         "cross-env": "^7.0.3",
         "eslint": "^9.27.0",
         "husky": "^9.1.6",
