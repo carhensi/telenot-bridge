@@ -31,7 +31,7 @@
         "winston-daily-rotate-file": "^5.0.0"
     },
     "devDependencies": {
-        "@babel/preset-env": "^7.27.2",
+        "@babel/preset-env": "^7.28.0",
         "@jest/globals": "^29.7.0",
         "cross-env": "^7.0.3",
         "eslint": "^9.27.0",
