@@ -24,7 +24,7 @@
     "license": "ISC",
     "dependencies": {
         "@babel/core": "^7.27.1",
-        "dotenv": "^16.5.0",
+        "dotenv": "^17.2.2",
         "eslint-plugin-security": "^3.0.1",
         "mqtt": "^5.13.0",
         "winston": "^3.15.0",
