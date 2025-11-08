@@ -64,6 +64,10 @@ TELNETPORT=your_telenot_port
 # Other configurations...
 ```
 
+* Configure your sensors in `src/config/`:
+  - See [Configuration Guide](src/config-example/README.md) for detailed instructions
+  - Includes device type mapping, Telenot terminology, and troubleshooting
+
 ## 🏃‍♂️ Usage
 
 Start with running the ready to use container:
