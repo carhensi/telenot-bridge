@@ -1,6 +1,6 @@
 {
     "name": "telenot-bridge",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "A Node.js-based bridge for integrating the Telenot alarm system with Home Assistant and HomeKit.",
     "type": "module",
     "main": "src/index.mjs",
