@@ -1,3 +1,5 @@
+#!/bin/sh
+export PATH="/opt/homebrew/Cellar/yarn/1.22.22/bin:$PATH"
 yarn test
 yarn lint:fix
 yarn format
